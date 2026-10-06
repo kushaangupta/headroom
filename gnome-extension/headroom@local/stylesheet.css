@@ -1,0 +1,6 @@
+.headroom { spacing: 6px; }
+.headroom-flash { background-color: rgba(255, 59, 48, 0.6); border-radius: 8px; }
+.headroom-row { spacing: 4px; min-width: 22em; }
+.headroom-choice { padding: 2px 8px; border-radius: 6px; background-color: rgba(255, 255, 255, 0.08); }
+.headroom-choice:hover { background-color: rgba(255, 255, 255, 0.16); }
+.headroom-choice:checked { background-color: #3584e4; color: #ffffff; }

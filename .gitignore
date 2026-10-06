@@ -1,0 +1,15 @@
+# Build output: Headroom.exe is published on the Releases page (see .github/workflows/release.yml)
+*.exe
+*.obj
+*.lib
+a.out
+test_core
+
+# Python
+__pycache__/
+*.pyc
+
+# Personal settings if the tools are run from this folder (portable mode)
+headroom.json
+headroom.json.tmp
+headroom.log

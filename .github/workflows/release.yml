@@ -1,0 +1,38 @@
+# Push a version tag (e.g. `git tag v1.1 && git push origin v1.1`) and GitHub builds
+# Headroom.exe from that exact source and publishes it as a release asset.
+# "Run workflow" on the Actions tab builds it without releasing (download the artifact).
+name: Release Headroom.exe
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write # create the release and upload the exe
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang and lld
+        run: sudo apt-get update && sudo apt-get install -y clang lld
+
+      - name: Unit tests (portable core of the Windows build)
+        run: cc -std=c11 -Wall -Wextra -DHR_TEST windows/test_core.c -lm -o test_core && ./test_core
+
+      - name: Build Headroom.exe
+        run: windows/build.sh "$PWD/Headroom.exe"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Headroom.exe
+          path: Headroom.exe
+
+      - name: Publish the release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" Headroom.exe --title "Headroom $GITHUB_REF_NAME" --generate-notes

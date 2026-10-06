@@ -1,0 +1,8 @@
+{
+  "uuid": "headroom@local",
+  "name": "Headroom",
+  "description": "Free disk space, write rate and time until full in the top bar, with amber/red alerts, a notification and a sound before a recording can fill a disk. No file scanning; settings shared with headroom.py (~/.config/headroom/headroom.json).",
+  "shell-version": ["45", "46", "47", "48", "49"],
+  "session-modes": ["user", "unlock-dialog"],
+  "version": 1
+}
